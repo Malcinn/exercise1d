@@ -1,6 +1,8 @@
 package wdsr.exercise1.logic;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,4 +62,44 @@ public class CalculatorTest {
 		// then
 		// empty
 	}		
+	
+	@Test
+	public void testMax_shouldReturnMaxValueTrue(){
+		// given
+		int[] values = {-2, -4 , -100};
+		//when
+		int max = calculator.max(values);
+		// then
+		//assertEquals(-2, max);
+		// dla assertthat trzeba dodać statyczny import 
+		// import static org.hamcrest.CoreMatchers.is;
+		assertThat(-2, is(max)); 
+	}
+	
+	@Test
+	public void testMax_shouldReturnMaxValueFalse(){
+		// given
+		int[] values = {-2, -4 , -100};
+		//when
+		int max = calculator.max(values);
+		// then
+		//assertFalse(-100 == max);
+		assertThat(-100, is(not(max)));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_shouldRiseAnExceptionForNullArgument(){
+		// given
+		int[] values = null;
+		// when
+		int max = calculator.max(values);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_shouldRiseAnExceptionForEmptyArgument(){
+		// given
+		int[] values = {};
+		// when
+		int max = calculator.max(values);
+	}
 }
